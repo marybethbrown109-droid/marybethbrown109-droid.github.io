@@ -24,3 +24,23 @@ async function getWeatherData() {
 
 // Run the function
 getWeatherData();
+function renderForecast(dailyData) {
+    const container = document.getElementById("forecast-container");
+    container.innerHTML = ""; 
+
+    const dates = dailyData.time;
+    const maxTemps = dailyData.temperature_2m_max;
+    const minTemps = dailyData.temperature_2m_min;
+
+    for (let i = 0; i < dates.length; i++) {
+        const dayDiv = document.createElement("div");
+        
+        dayDiv.innerHTML = `
+            <p><strong>Date:</strong> ${dates[i]}</p>
+            <p><strong>High:</strong> ${maxTemps[i]}°F | <strong>Low:</strong> ${minTemps[i]}°F</p>
+            <hr>
+        `;
+        
+        container.appendChild(dayDiv);
+    }
+}
